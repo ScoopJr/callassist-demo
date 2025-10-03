@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
@@ -6,8 +7,8 @@ const { OpenAI } = require("openai");
 const app = express();
 app.use(bodyParser.json());
 
-const openai = new OpenAI({ apiKey: "YOUR_OPENAI_API_KEY" });
-const ELEVEN_API_KEY = "YOUR_ELEVENLABS_API_KEY";
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const ELEVEN_API_KEY = process.env.ELEVEN_API_KEY;
 
 app.post("/call-webhook", async (req, res) => {
     const callerText = req.body.SpeechResult; // Twilio speech-to-text
@@ -32,11 +33,15 @@ At the end, confirm: "Thanks! I’ve noted your message."
 
     // Convert AI text to audio via ElevenLabs TTS
     const voiceId = "EXAVITQu4vr4xnSDxMaL"; // Example voice
+    // TEMP: just return the AI text as plain text for now
+    const ttsResponse = { data: Buffer.from(aiText) }; // converts text to buffer
+  /*
     const ttsResponse = await axios.post(
         `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
         { text: aiText },
         { headers: { "xi-api-key": ELEVEN_API_KEY, "Content-Type": "application/json" }, responseType: "arraybuffer" }
     );
+  */
 
     // Return audio to Twilio
     res.set("Content-Type", "audio/mpeg");
@@ -44,3 +49,8 @@ At the end, confirm: "Thanks! I’ve noted your message."
 });
 
 app.listen(5000, () => console.log("CallAssist server running on port 5000"));
+
+
+
+
+
