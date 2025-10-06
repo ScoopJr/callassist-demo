@@ -33,7 +33,7 @@ function loadCompanyProfile(companyId = 1) {
   }
 }
 
-// Simple mock AI
+// Simple mock AI - placeholder
 function mockAIResponse(callerText, company) {
   const text = (callerText || "").toLowerCase();
   const faqs = company?.faqs || {};
@@ -84,7 +84,7 @@ app.post("/call-webhook", (req, res) => {
 // Dashboard page (with company details)
 // -----------------------
 app.get("/dashboard", (req, res) => {
-  // Fetch company from DB
+  // Fetch full company details
   let company = db.prepare("SELECT * FROM companies WHERE companyId = ?").get(1);
 
   // Fallback if no company found
@@ -93,6 +93,7 @@ app.get("/dashboard", (req, res) => {
       name: "Demo Company", 
       package: "starter", 
       phoneNumber: "", 
+      location: "", 
       email: "", 
       whatsapp: "", 
       hours: "", 
@@ -110,7 +111,6 @@ app.get("/dashboard", (req, res) => {
   messages.forEach(m => {
     const nameMatch = m.message.match(/name[:\s]+([a-zA-Z ]+)/i);
     const name = nameMatch ? nameMatch[1].trim() : "(unknown)";
-
     const emailMatch = m.message.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/);
     const email = emailMatch ? emailMatch[0] : "(unknown)";
 
@@ -123,10 +123,26 @@ app.get("/dashboard", (req, res) => {
       lastContact: m.timestamp
     };
   });
+
   const customers = Object.values(customersMap);
 
-  // Render dashboard.ejs
+  // Render dashboard with full company data
   res.render("dashboard", { company, messages, analytics, customers });
+});
+
+// -----------------------
+// Update company details
+// -----------------------
+app.post("/update-company", (req, res) => {
+  const { name, package: plan, phoneNumber, location, email, whatsapp, hours, greeting, payment } = req.body;
+
+  db.prepare(`
+    UPDATE companies
+    SET name = ?, package = ?, phoneNumber = ?, location = ?, email = ?, whatsapp = ?, hours = ?, greeting = ?, payment = ?
+    WHERE companyId = 1
+  `).run(name, plan, phoneNumber, location, email, whatsapp, hours, greeting, payment);
+
+  res.redirect("/dashboard");
 });
 
 

@@ -9,20 +9,51 @@
   <h1>Dashboard</h1>
 
   <!-- Company Details Form -->
-  <h2>My Company Details</h2>
-  <form action="/dashboard/update-company" method="POST">
-    <label>Company Name<input type="text" name="companyName" value="<%= company.name %>" required></label>
-    <label>Package
-      <select name="package" required>
-        <option value="starter" <%= company.package === 'starter' ? 'selected' : '' %>>Starter - $79/month</option>
-        <option value="growth" <%= company.package === 'growth' ? 'selected' : '' %>>Growth - $149/month</option>
-        <option value="pro" <%= company.package === 'pro' ? 'selected' : '' %>>Pro - $299/month</option>
-      </select>
-    </label>
-    <label>Phone Number<input type="text" name="phoneNumber" value="<%= company.phoneNumber %>"></label>
-    <label>Email<input type="email" name="email" value="<%= company.email %>"></label>
-    <button type="submit">Update Company Details</button>
-  </form>
+<h2>My Company Details</h2>
+<form action="/update-company" method="POST">
+  <label>Company Name
+    <input type="text" name="name" value="<%= company.name %>" required>
+  </label>
+
+  <label>Package
+    <select name="package" required>
+      <option value="starter" <%= company.package === 'starter' ? 'selected' : '' %>>Starter - $79/month</option>
+      <option value="growth" <%= company.package === 'growth' ? 'selected' : '' %>>Growth - $149/month</option>
+      <option value="pro" <%= company.package === 'pro' ? 'selected' : '' %>>Pro - $299/month</option>
+    </select>
+  </label>
+
+  <label>Phone Number
+    <input type="text" name="phoneNumber" value="<%= company.phoneNumber %>">
+  </label>
+
+  <label>Location
+    <input type="text" name="location" value="<%= company.location %>">
+  </label>
+
+  <label>Email
+    <input type="email" name="email" value="<%= company.email %>">
+  </label>
+
+  <label>WhatsApp Number
+    <input type="text" name="whatsapp" value="<%= company.whatsapp %>">
+  </label>
+
+  <label>Opening Hours
+    <input type="text" name="hours" value="<%= company.hours %>">
+  </label>
+
+  <label>Initial Greeting
+    <textarea name="greeting"><%= company.greeting %></textarea>
+  </label>
+
+  <label>Payment Details
+    <input type="text" name="payment" value="<%= company.payment %>">
+  </label>
+
+  <button type="submit">Update Company Details</button>
+</form>
+
 
   <!-- Messages Table -->
   <h2>Messages</h2>
