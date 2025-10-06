@@ -1,2 +1,15 @@
-.env
+# Node modules
 node_modules/
+
+# Environment variables
+.env
+
+# Databases / local storage
+*.db
+*.json
+
+# Audio files
+*.mp3
+
+# MacOS / system files
+.DS_Store
