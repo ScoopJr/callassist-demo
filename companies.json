@@ -1,0 +1,11 @@
+[
+  {
+    "companyId": 1,
+    "name": "Demo Plumbing",
+    "faqs": {
+      "hours": "8am–6pm, Mon–Sat",
+      "serviceArea": "Local metro",
+      "contactEmail": "hello@demoplumbing.example"
+    }
+  }
+]
