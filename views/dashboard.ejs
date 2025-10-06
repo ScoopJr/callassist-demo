@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CallAssist Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Dashboard</h1>
+
+  <!-- Company Details Form -->
+  <h2>My Company Details</h2>
+  <form action="/dashboard/update-company" method="POST">
+    <label>Company Name<input type="text" name="companyName" value="<%= company.name %>" required></label>
+    <label>Package
+      <select name="package" required>
+        <option value="starter" <%= company.package === 'starter' ? 'selected' : '' %>>Starter - $79/month</option>
+        <option value="growth" <%= company.package === 'growth' ? 'selected' : '' %>>Growth - $149/month</option>
+        <option value="pro" <%= company.package === 'pro' ? 'selected' : '' %>>Pro - $299/month</option>
+      </select>
+    </label>
+    <label>Phone Number<input type="text" name="phoneNumber" value="<%= company.phoneNumber %>"></label>
+    <label>Email<input type="email" name="email" value="<%= company.email %>"></label>
+    <button type="submit">Update Company Details</button>
+  </form>
+
+  <!-- Messages Table -->
+  <h2>Messages</h2>
+  <table>
+    <tr><th>Caller</th><th>Message</th><th>Response</th><th>Timestamp</th></tr>
+    <% messages.forEach(m => { %>
+      <tr>
+        <td><%= m.callerNumber %></td>
+        <td><%= m.message %></td>
+        <td><%= m.response %></td>
+        <td><%= m.timestamp %></td>
+      </tr>
+    <% }) %>
+  </table>
+
+  <!-- Customers Table -->
+  <h2>Customers</h2>
+  <table>
+    <tr><th>Name</th><th>Phone</th><th>Email</th><th>Last Message</th><th>Last Response</th><th>Last Contact</th><th>View</th></tr>
+    <% customers.forEach(c => { %>
+      <tr>
+        <td><%= c.name %></td>
+        <td><%= c.callerNumber %></td>
+        <td><%= c.email %></td>
+        <td><%= c.lastMessage %></td>
+        <td><%= c.lastResponse %></td>
+        <td><%= c.lastContact %></td>
+        <td><a href="/dashboard/customer/<%= encodeURIComponent(c.callerNumber) %>">View Calls</a></td>
+      </tr>
+    <% }) %>
+  </table>
+
+</body>
+</html>

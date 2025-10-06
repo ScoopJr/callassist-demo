@@ -1,0 +1,28 @@
+<!DOCTYPE html>   
+   <html>
+      <head>
+        <title>Sign Up - CallAssist</title>
+		<link rel="stylesheet" href="/css/style.css">
+      </head>
+      <body>
+        <h1>Create Your Account</h1>
+        <form action="/signup" method="POST">
+          <label>Company Name<input type="text" name="companyName" required></label>
+          <label>Package
+            <select name="package" required>
+              <option value="starter">Starter - $79/month</option>
+              <option value="growth">Growth - $149/month</option>
+              <option value="pro">Pro - $299/month</option>
+            </select>
+          </label>
+          <label>Phone Number<input type="text" name="phoneNumber" required></label>
+          <label>Location<input type="text" name="location"></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>WhatsApp Number<input type="text" name="whatsapp"></label>
+          <label>Opening Hours<input type="text" name="hours"></label>
+          <label>Initial Greeting<textarea name="greeting">Hi, thanks for calling! How can we help?</textarea></label>
+          <label>Payment Details<input type="text" name="payment"></label>
+          <button type="submit">Create Account</button>
+        </form>
+      </body>
+    </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Call History for <%= phone %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <h1>Call History for <%= phone %></h1>
+  <a href="/dashboard">← Back to Dashboard</a>
+
+  <!-- Messages -->
+  <h2>Messages</h2>
+  <table>
+    <tr>
+      <th>Message</th>
+      <th>Response</th>
+      <th>Timestamp</th>
+    </tr>
+    <% messages.forEach(m => { %>
+      <tr>
+        <td><%= m.message %></td>
+        <td><%= m.response %></td>
+        <td><%= m.timestamp %></td>
+      </tr>
+    <% }) %>
+  </table>
+
+  <!-- Analytics -->
+  <h2>Analytics</h2>
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Response</th>
+      <th>Timestamp</th>
+    </tr>
+    <% analytics.forEach(a => { %>
+      <tr>
+        <td><%= a.input %></td>
+        <td><%= a.response %></td>
+        <td><%= a.timestamp %></td>
+      </tr>
+    <% }) %>
+  </table>
+
+</body>
+</html>
