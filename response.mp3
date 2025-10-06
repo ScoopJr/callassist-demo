@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.<br> &nbsp; &nbsp;at APIError.generate (C:\Users\Guy\callassist-demo\node_modules\openai\core\error.js:63:20)<br> &nbsp; &nbsp;at OpenAI.makeStatusError (C:\Users\Guy\callassist-demo\node_modules\openai\client.js:163:32)<br> &nbsp; &nbsp;at OpenAI.makeRequest (C:\Users\Guy\callassist-demo\node_modules\openai\client.js:331:30)<br> &nbsp; &nbsp;at process.processTicksAndRejections (node:internal/process/task_queues:105:5)<br> &nbsp; &nbsp;at async C:\Users\Guy\callassist-demo\server.js:24:24</pre>
+</body>
+</html>
