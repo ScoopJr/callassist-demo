@@ -84,10 +84,9 @@ app.post("/call-webhook", (req, res) => {
 // Dashboard page (with company details)
 // -----------------------
 app.get("/dashboard", (req, res) => {
-  // Fetch full company details
+  // Fetch company
   let company = db.prepare("SELECT * FROM companies WHERE companyId = ?").get(1);
 
-  // Fallback if no company found
   if (!company) {
     company = { 
       name: "Demo Company", 
@@ -126,7 +125,9 @@ app.get("/dashboard", (req, res) => {
 
   const customers = Object.values(customersMap);
 
-  // Render dashboard with full company data
+  console.log("Messages from DB:", messages);
+  console.log("Analytics from DB:", analytics);
+
   res.render("dashboard", { company, messages, analytics, customers });
 });
 
@@ -144,6 +145,23 @@ app.post("/update-company", (req, res) => {
 
   res.redirect("/dashboard");
 });
+
+
+// -----------------------
+// Update company details
+// -----------------------
+app.post("/update-company", (req, res) => {
+  const { name, package: plan, phoneNumber, location, email, whatsapp, hours, greeting, payment } = req.body;
+
+  db.prepare(`
+    UPDATE companies
+    SET name = ?, package = ?, phoneNumber = ?, location = ?, email = ?, whatsapp = ?, hours = ?, greeting = ?, payment = ?
+    WHERE companyId = 1
+  `).run(name, plan, phoneNumber, location, email, whatsapp, hours, greeting, payment);
+
+  res.redirect("/dashboard");
+});
+
 
 
 // -----------------------
